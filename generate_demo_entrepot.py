@@ -58,12 +58,17 @@ TAILLE_FAMILLE = 6
 PROB_FAMILLE = 0.65
 
 # 1. LES ADRESSES VIENNENT DU PLAN, JAMAIS D'ICI
-with open(ADRESSES, encoding="utf-8") as f:
+#
+# Lu en « utf-8-sig » et non « utf-8 » : l'application place volontairement une
+# marque d'ordre des octets en tête du fichier exporté, pour qu'Excel ouvre les
+# accents correctement au lieu d'afficher « RÃ©ception ». Sans le -sig, cette
+# marque se colle au premier nom de colonne et « adresse » devient introuvable.
+with open(ADRESSES, encoding="utf-8-sig") as f:
     adresses = list(csv.DictReader(f))
 print(f"{len(adresses)} adresses lues dans le plan.")
 
 # 2. LES ARTICLES VIENNENT DU CATALOGUE RÉEL
-with open(CATALOGUE, encoding="utf-8") as f:
+with open(CATALOGUE, encoding="utf-8-sig") as f:
     catalogue = list(csv.DictReader(f))
 
 # Un article ne peut occuper qu'une alvéole où il entre. On apparie donc les

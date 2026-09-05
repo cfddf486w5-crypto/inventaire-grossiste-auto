@@ -71,7 +71,7 @@ FAMILY_ORDER_PROB = 0.65
 products = []
 fieldnames = []
 try:
-    with open(INVENTORY_FILE, mode="r", encoding="utf-8") as f:
+    with open(INVENTORY_FILE, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         fieldnames = list(reader.fieldnames or [])
         for row in reader:
